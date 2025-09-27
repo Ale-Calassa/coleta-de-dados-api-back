@@ -1,23 +1,22 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS  # 🔹 Importa o CORS
+from flask_cors import CORS
 from database import SessionLocal, engine, Base
 from models import DadosComerciais
 from datetime import datetime
 import os
 
-# Criando a aplicação do "Flask".
 app = Flask(__name__)
-CORS(app, origins=["https://ale-calassa.github.io/Formulario-Coleta-de-Dados-Vendas/"])  # 🔓 Libera acesso apenas do frontend
+CORS(app, origins=["https://ale-calassa.github.io/Formulario-Coleta-de-Dados-Vendas/"])
 
-# Para Criar a tabela no DB caso não exista
 Base.metadata.create_all(bind=engine)
 
-# Criando a Rota pra receber os dados via "POST".
+@app.route('/')
+def index():
+    return jsonify({"mensagem": "API Coleta de Dados está rodando com sucesso!"})
+
 @app.route('/dados', methods=['POST'])
 def receber_dados():
-    data = request.get_json() # Forma de Pegar os dados enviados no formato JSON
-
-    # Para calcular o valor total da venda
+    data = request.get_json()
     valor_total = int(data["quantidade"]) * float(data["valor_unitario"])
     session = SessionLocal()
 
