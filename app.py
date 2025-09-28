@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-CORS(app, origins=["https://ale-calassa.github.io"], supports_credentials=True)
+CORS(app, origins=["https://ale-calassa.github.io"] )
 
 Base.metadata.create_all(bind=engine)
 
