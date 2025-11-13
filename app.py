@@ -40,5 +40,11 @@ def receber_dados():
     return jsonify({"mensagem": "Dados salvos com sucesso!!!"}), 201
 
 if __name__ == '__main__':
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("Tabelas verificadas/criadas com sucesso.")
+    except Exception as e:
+        print("Erro ao conectar com o banco:", e)
+
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
