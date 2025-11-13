@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, Date
 from database import Base
 
 class DadosComerciais(Base):
-    __tablename__ = "commercial_data"
+    __tablename__ = "dados_vendas"
 
     id = Column(Integer, primary_key=True, index=True)
     nome_cliente = Column(String(50), nullable=False)
